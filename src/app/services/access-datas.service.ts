@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, Subject } from '../../../node_modules/rxjs';
+import { Observable, BehaviorSubject } from '../../../node_modules/rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AccessDatasService {
   public datas;
-  private subject = new Subject<any>();
+  private subject = new BehaviorSubject<any>(0);
 
   constructor(private http: HttpClient) {
     this.loadDatas();
@@ -32,5 +32,9 @@ export class AccessDatasService {
 
   getDatas(): Observable<any> {
     return this.subject.asObservable();
+  }
+
+  setNext(next) {
+    this.subject.next(next);
   }
 }
