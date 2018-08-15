@@ -22,6 +22,10 @@ export class AccessDatasService {
     });
   }
 
+  getOne(id) {
+    return this.http.get('https://jsonplaceholder.typicode.com/posts/'+ id);
+  }
+
   setDatas() {
     this.subject.next(this.datas);
     // return new Observable((observer) => {
